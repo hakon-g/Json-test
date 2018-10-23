@@ -6,36 +6,45 @@ This program parse a text file and convert it to a json format
 #import json
 import random
 
-def main():
-    print("Json converter")
-
-    out_of_range = True
+def read_input():
     attempts = 4
+    attempt_text = [" attempt", " attempts"]
 
     while attempts:
         try:
-            some_number = int(input("Type in a number between 1 and 100: "))
-            print("You typed: " + str(some_number))
+            input_number = int(input("Type in a number between 1 and 100: "))
+            print("You typed: " + str(input_number))
             
-            if some_number > 100:
+            if input_number > 100:
                 print("Number is too high.")
-            elif some_number < 1:
+            elif input_number < 1:
                 print("Number is too low.")
             else:
-                out_of_range = False
                 break
 
         except:
             print("That's not an integer")
-        
-        attempts -= 1
 
+        attempts -= 1
+        
         if attempts:
-            print("You have " + str(attempts) + " attempts left!")
+            index = 1
+            
+            if attempts == 1:
+                index = 0
+
+            print("You have " + str(attempts) + attempt_text[index] + " left!")
         else:
+            input_number = -1
             print("No more attempts. Program will exit!")
 
-    if out_of_range == False:       
+    return input_number
+
+def main():
+    print("Json converter")
+
+    some_number = read_input()
+    if some_number > 0:
         line_number = 1
         random_numbers = []
 
